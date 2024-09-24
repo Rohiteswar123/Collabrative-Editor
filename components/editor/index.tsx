@@ -7,16 +7,18 @@ import { Editor, OnMount } from "@monaco-editor/react";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "../ui/resizable";
 import { useRef } from "react";
 import monaco from "monaco-editor";
-export  function CodeEditor(){
+import Sidebar from "./sidebar";
+export  default function CodeEditor(){
     const editorref=useRef<null|monaco.editor.IStandaloneCodeEditor>(null)
     const handleEditorMount:OnMount=(editor,monaco)=>{
         editorref.current=editor
     }
    return (
     <>
-          <div className="h-full w-52"></div>
+          {/* <div className="h-full w-52"></div> */}
+          <Sidebar/>
           <ResizablePanelGroup direction="horizontal">
-                <ResizablePanel maxSize={75} minSize={30} defaultSize={60 } className=" flex  p-2">
+                <ResizablePanel maxSize={75} minSize={30} defaultSize={60 } className=" flex flex-col p-2">
                     
                 <div className="h-10 w-full flex gap-2">
                  <Button variant={"secondary"} size={"sm"} className="min-w-20 justify-between">
@@ -30,7 +32,21 @@ export  function CodeEditor(){
                 <div className="grow w-full  overflow-hidden rounded-lg">
                    <Editor height={"100%"}
                   defaultLanguage="typescript"
-                  theme="vs-dark" onMount={handleEditorMount} />
+                  theme="vs-dark" onMount={handleEditorMount}
+                  options={{
+                    minimap:{
+                        enabled:false
+                    },
+                    padding:{
+                        bottom:4,
+                        top:4
+                    },
+                    scrollBeyondLastLine:false
+                  }
+                   
+                  }
+                  
+                  />
                   
                 </div>
                 </ResizablePanel>
