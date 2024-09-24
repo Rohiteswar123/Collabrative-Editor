@@ -2,6 +2,7 @@ import { ChevronLeft, Clock, Pencil } from "lucide-react";
 import { Button } from "../ui/button";
 import logo from "../../assests/logo.svg"
 import Image from "next/image";
+import { UserButton } from "@clerk/nextjs";
 export default function Navbar() {
     return (
         <div className="h-14 px-2 w-full flex items-center justify-between border-b border-border">
@@ -16,6 +17,7 @@ export default function Navbar() {
                     </div>
                 </div>
             </div>
+            <UserButton/>
         </div>
     )
 }
