@@ -8,6 +8,8 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "../ui/resi
 import { useRef } from "react";
 import monaco from "monaco-editor";
 import Sidebar from "./sidebar";
+
+
 export  default function CodeEditor(){
     const editorref=useRef<null|monaco.editor.IStandaloneCodeEditor>(null)
     const handleEditorMount:OnMount=(editor,monaco)=>{

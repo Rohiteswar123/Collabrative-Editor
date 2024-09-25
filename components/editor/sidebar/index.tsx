@@ -1,5 +1,35 @@
 import { File, FilePlus, Folder, FolderPlus, Search } from "lucide-react";
+import Image from "next/image";
+import { getIconForFile } from "vscode-icons-js";
+import { TFolder,TFile } from "./types";
+import SidebarFile from "./file";
+import SidebarFolder from "./folder";
+const data:(TFile|TFolder)[]=[
+    {
+        id:"index.tsx",
+        name:"index.tsx",
+        type:"file",
 
+    },
+    {
+        id:"components",
+        name:"components",
+        type:"folder",
+        children:[
+            {
+                id:"navbar.tsx",
+                name:"navbar.tsx",
+                type:"file",
+            },
+            {
+                id:"ui",
+                name:"ui",
+                type:"folder",
+                children:[]
+            }
+        ]
+    }
+]
 export default function Sidebar(){
     return (
         <div className="h-full flex w-56 flex-col item-start p-2">
@@ -18,14 +48,11 @@ export default function Sidebar(){
               </div>
            </div>
            <div className="w-full mt-2">
-              <div className="w-full flex items-center h-6 transition-colors hover:bg-muted-foreground cursor-pointer">
-                <File className="w-4 h-4 mr-2"/>
-                index.html
-              </div>
-              <div className="w-full flex items-center h-6 transition-colors hover:bg-muted-foreground cursor-pointer">
-                <Folder className="w-4 h-4 mr-2"/>
-                styles 
-              </div>
+              {
+                data.map((child)=> child.type==="file"? <SidebarFile key={child.id} data={child }/>
+                :<SidebarFolder key={child.id} data={child}/>
+                )
+              }
            </div>
         </div>
     )
